@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Monofett&family=Sora:wght@400;600&family=Source+Code+Pro:ital,wght@0,400;1,500&display=swap");
+
+body,
+html {
+  font-family: "Sora", sans-serif;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+  background-color: #012a4a;
+}
+
+.container--sidebar {
+  flex: 1;
+}
+
+.container--main {
+  flex: 3;
+  /* height: 100%; */
+  align-items: stretch;
+  margin: 5px;
+  border: 5px solid #89c2d9;
+  border-radius: 10px;
+  /* background-color: #121111; */
+}
+
+.chat {
+  display: flex;
+  height: 50px;
+  /* margin: 10px; */
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border: 15px #012a4a;
+  border-radius: 10px;
+  /* background-color: #013a63; */
+}
+
+.chatBar {
+  flex: 1;
+  font-size: large;
+  color: #012a4a;
+  border-radius: 10px;
+  background-color: #a9d6e5;
+}
+
+.userStyle {
+  margin-left: 5px;
+  margin-right: 10px;
+  font-size: 20px;
+  color: orange;
+}
+
+.messageStyle {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 20px;
+  color: rgb(186, 186, 186);
+}
+
+.sendChat {
+  border-radius: 10px;
+}
