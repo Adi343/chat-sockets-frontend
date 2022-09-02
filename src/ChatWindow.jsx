@@ -59,7 +59,6 @@ export default function ChatWindow() {
         flexDirection: "column",
         // justifyItems: "flex-end",
         border: "5px #89c2d9",
-        borderRadius: "10px",
         backgroundColor: "#a9d6e5",
       }}
     >
