@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
+import { nanoid } from "nanoid";
 
 const webSocketUrl = process.env.REACT_APP_API;
+const userId = nanoid();
 
 export default function ChatWindow() {
   const [chatData, setChatData] = useState([]);
@@ -40,6 +42,7 @@ export default function ChatWindow() {
       setChat(chatMessage);
       const message = {
         user: "Me",
+        userId: userId,
         message: chatMessage,
       };
       console.log(`submitChat called! ${JSON.stringify(message)}`);
