@@ -7,6 +7,30 @@ export default function ChatWindow() {
   const [chat, setChat] = useState("");
   const inputRef = useRef(null);
   const scrollRef = useRef(null);
+  const webSocket = useRef(null);
+
+  useEffect(() => {
+    if (webSocket.current === null || webSocket.current === {}) {
+      webSocket.current = new WebSocket(webSocketUrl);
+
+      webSocket.current.addEventListener("message", function (event) {
+        const data = JSON.parse(event.data);
+        setChatData((arr) => [...arr, data]);
+        scrollRef.current.scrollIntoView({ behavior: "smooth" });
+      });
+    }
+
+    return () => {
+      if (webSocket.current !== null || webSocket.current !== {}) {
+        webSocket.current.close();
+        webSocket.current = null;
+      }
+    };
+  }, [chat]);
+
+  useEffect(() => {
+    scrollRef.current.scrollIntoView({ behavior: "smooth" });
+  }, [chatData]);
 
   const submitChat = (e) => {
     let chatMessage = e.target.value;
@@ -19,36 +43,15 @@ export default function ChatWindow() {
         message: chatMessage,
       };
       console.log(`submitChat called! ${JSON.stringify(message)}`);
+      console.log(`webSocket is ${JSON.stringify(webSocket)}`);
+      if (webSocket.current.value !== null) {
+        console.log("Inside if webscoket not undefined");
+        webSocket.current.send(JSON.stringify(message));
+      }
       setChatData((arr) => [...arr, message]);
       setChat("");
     }
   };
-  useEffect(() => {
-    let webSocket;
-    if (webSocketUrl) {
-      webSocket = new WebSocket(webSocketUrl);
-
-      // webSocket.addEventListener("open", function (event) {
-      //   webSocket.send("Hello from React!");
-      // });
-
-      webSocket.addEventListener("message", function (event) {
-        const data = JSON.parse(event.data);
-        setChatData((arr) => [...arr, data]);
-        scrollRef.current.scrollIntoView({ behavior: "smooth" });
-      });
-    }
-
-    return () => {
-      if (webSocketUrl !== undefined) {
-        webSocket.close();
-      }
-    };
-  }, [chat]);
-
-  useEffect(() => {
-    scrollRef.current.scrollIntoView({ behavior: "smooth" });
-  }, [chatData]);
 
   return (
     <div
