@@ -16,8 +16,12 @@ export default function ChatWindow() {
       webSocket.current = new WebSocket(webSocketUrl);
 
       webSocket.current.addEventListener("message", function (event) {
+        console.log(`event is ${JSON.stringify(event)}`);
+        console.log(`event.data is ${JSON.stringify(event)}`);
         const data = JSON.parse(event.data);
-        setChatData((arr) => [...arr, data]);
+        if (data.userId !== userId) {
+          setChatData((arr) => [...arr, data]);
+        }
         scrollRef.current.scrollIntoView({ behavior: "smooth" });
       });
     }
