@@ -48,6 +48,7 @@ export default function ChatWindow() {
         user: "Me",
         userId: userId,
         message: chatMessage,
+        messageId: nanoid(),
       };
       console.log(`submitChat called! ${JSON.stringify(message)}`);
       console.log(`webSocket is ${JSON.stringify(webSocket)}`);
@@ -104,7 +105,7 @@ export default function ChatWindow() {
           />
           {chatData.map((item) => (
             <div
-              key={item.message}
+              key={item.messageId}
               style={{
                 margin: "5px",
               }}
